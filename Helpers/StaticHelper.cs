@@ -16,6 +16,8 @@ public static class StaticHelper
         var config = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
+            .AddUserSecrets<Program>(optional: true, reloadOnChange: true)
             .Build();
 
         settings = new();
