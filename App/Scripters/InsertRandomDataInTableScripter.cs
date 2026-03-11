@@ -117,7 +117,7 @@ internal class InsertRandomDataInTableScripter : IScripter
                 names.AppendLine(Bracket(col.Name));
                 if (useNull)
                 {
-                    values.Append("NULL");
+                    values.AppendLine("NULL" + $"\t\t\t--{col.Name}");
                 }
                 else
                 {
@@ -132,7 +132,7 @@ internal class InsertRandomDataInTableScripter : IScripter
                         val = RandomValue(col, rng, jsonCols);
                     }
 
-                    values.AppendLine(ToSqlLiteral(val));
+                    values.AppendLine(ToSqlLiteral(val) + $"\t\t\t--{col.Name}");
                 }
 
             }

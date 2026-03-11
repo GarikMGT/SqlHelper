@@ -16,7 +16,7 @@ class Program
         //RunScripter<CreateColumnScripter.DropColumnScripter>(out var outputFilePath2);
         //Console.WriteLine($"Script written to: {outputFilePath2}");
 
-        /RunScripter<CreateTableScripter>(out var outputFilePath3);
+        //RunScripter<CreateTableScripter>(out var outputFilePath3);
         //Console.WriteLine($"Script written to: {outputFilePath3}");
 
         RunScripter<InsertRandomDataInTableScripter>(out var outputFilePath4);
