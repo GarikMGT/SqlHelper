@@ -1,0 +1,30 @@
+DB2 CDC tables
+  ↓
+Generate temporary event tables
+  ↓
+Generate executable SQL script
+  ↓
+Run generated script on DB1
+  ↓
+DB1 receives DB2 changes
+
+1. Read DB2 CDC changes since StartLSN.
+2. Store all events in one generic #CdcEvents table.
+3. Preserve CDC order.
+4. Generate SQL statements in that same order.
+5. Run generated script on DB1 in one transaction.
+6. Let PK/FK errors fail and rollback.
+
+/*
+DB1 and DB2 same state
+ ↓
+Enable CDC on DB2
+ ↓
+Save StartLSN outside DB1
+ ↓
+Make changes in DB2
+ ↓
+Read CDC changes from DB2 after StartLSN
+ ↓
+Apply those changes to DB1
+*/
