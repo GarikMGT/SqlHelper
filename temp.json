@@ -1,0 +1,57 @@
+{
+  "UPDATE": {
+    "__$start_lsn": "AAAAKwAAD1gACQ==",
+    "__$seqval": "AAAAKwAAD1gAAg==",
+    "__$operation": 4,
+    "__$update_mask": "DA==",
+    "CustomerId": 1,
+    "CustomerName": "Anna",
+    "City": "Abovyan",
+    "ModifiedDate": "2026-06-12T15:30:52.1265880"
+  },
+  "INSERT": {
+    "__$start_lsn": "AAAAKwAAD1gACQ==",
+    "__$seqval": "AAAAKwAAD1gAAw==",
+    "__$operation": 2,
+    "__$update_mask": "Dw==",
+    "CustomerId": 4,
+    "CustomerName": "Gor",
+    "City": "Dilijan",
+    "ModifiedDate": "2026-06-12T15:30:52.1265880"
+  },
+
+
+  "UPDATE2": {
+    "__$start_lsn": "AAAAKwAAD1gACQ==",
+    "__$seqval": "AAAAKwAAD1gABA==",
+    "__$operation": 4,
+    "__$update_mask": "HA==",
+    "OrderId": 101,
+    "CustomerId": 1,
+    "OrderAmount": 125.50,
+    "OrderStatus": "Paid",
+    "ModifiedDate": "2026-06-12T15:30:52.1265880"
+  },
+  "DELETE2": {
+    "__$start_lsn": "AAAAKwAAD1gACQ==",
+    "__$seqval": "AAAAKwAAD1gABQ==",
+    "__$operation": 1,
+    "__$update_mask": "Hw==",
+    "OrderId": 103,
+    "CustomerId": 3,
+    "OrderAmount": 300.00,
+    "OrderStatus": "Closed",
+    "ModifiedDate": "2026-06-01T10:00:00"
+  },
+  "INSERT2": {
+    "__$start_lsn": "AAAAKwAAD1gACQ==",
+    "__$seqval": "AAAAKwAAD1gACA==",
+    "__$operation": 2,
+    "__$update_mask": "Hw==",
+    "OrderId": 104,
+    "CustomerId": 4,
+    "OrderAmount": 80.00,
+    "OrderStatus": "Open",
+    "ModifiedDate": "2026-06-12T15:30:52.1265880"
+  }
+}

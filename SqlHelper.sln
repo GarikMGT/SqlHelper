@@ -5,25 +5,6 @@ VisualStudioVersion = 18.5.11723.231 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlHelper", "SqlHelper.csproj", "{E5EAC0DD-4F23-43D5-A035-6D51C8D3D0B3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DbReplication", "DbReplication", "{29E4D508-A2C9-4F7E-AB8C-4A89F56C029C}"
-	ProjectSection(SolutionItems) = preProject
-		Worklflow.txt = Worklflow.txt
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step1_DbCreation", "Step1_DbCreation", "{13064477-737D-4CBD-A6A9-84F524CDEF0F}"
-	ProjectSection(SolutionItems) = preProject
-		CreateDb.sql = CreateDb.sql
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step2_EnableCDC", "Step2_EnableCDC", "{EE0A1C19-ED5F-42AE-9EFE-9072FA9B298B}"
-	ProjectSection(SolutionItems) = preProject
-		Step1_EnableCDC.sql = Step1_EnableCDC.sql
-		Step2_SaveCDCStartingPoint.sql = Step2_SaveCDCStartingPoint.sql
-		Step3_DoSomeChangesInDB2.sql = Step3_DoSomeChangesInDB2.sql
-		Step4_ReadTheTrackings.sql = Step4_ReadTheTrackings.sql
-		Step5_AddDataInDB1_NoTracking.sql = Step5_AddDataInDB1_NoTracking.sql
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +18,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{13064477-737D-4CBD-A6A9-84F524CDEF0F} = {29E4D508-A2C9-4F7E-AB8C-4A89F56C029C}
-		{EE0A1C19-ED5F-42AE-9EFE-9072FA9B298B} = {29E4D508-A2C9-4F7E-AB8C-4A89F56C029C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE71F89A-2DDE-4E20-8200-F91507C040FA}

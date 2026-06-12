@@ -1,7 +1,26 @@
 USE CDC_DB2;
 GO
 
-DECLARE @SavedStartLsn BINARY(10) = 0x0000002B00000CD00001;
+IF OBJECT_ID(N'dbo.ExportCdcEvents', N'P') IS NULL
+BEGIN
+    EXEC('
+        CREATE PROCEDURE dbo.ExportCdcEvents
+        AS
+        BEGIN
+            SET NOCOUNT ON;
+        END
+    ');
+END
+GO
+
+ALTER PROCEDURE dbo.ExportCdcEvents
+(
+    @SavedStartLsn BINARY(10)
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
 DECLARE @FromLsn       BINARY(10) = sys.fn_cdc_increment_lsn(@SavedStartLsn);
 DECLARE @ToLsn         BINARY(10) = sys.fn_cdc_get_max_lsn();
 
@@ -16,7 +35,7 @@ CREATE TABLE #CdcEvents
     EventId        INT IDENTITY(1,1) PRIMARY KEY,
     SchemaName     SYSNAME NOT NULL,
     TableName      SYSNAME NOT NULL,
-    PrimaryKeyJson NVARCHAR(MAX) NOT NULL,
+    RecordDataJson NVARCHAR(MAX) NOT NULL,
     RowDataJson    NVARCHAR(MAX) NULL,
     OperationCode  INT NOT NULL,
     StartLsn       BINARY(10) NOT NULL,
@@ -56,8 +75,7 @@ BEGIN
         (
             SchemaName,
             TableName,
-            PrimaryKeyJson,
-            RowDataJson,
+            RecordDataJson,
             OperationCode,
             StartLsn,
             SeqVal
@@ -69,14 +87,6 @@ BEGIN
                 SELECT src.*
                 FOR JSON PATH, WITHOUT_ARRAY_WRAPPER
             ),
-            CASE
-                WHEN src.__$operation = 1 THEN NULL
-                ELSE
-                (
-                    SELECT src.*
-                    FOR JSON PATH, WITHOUT_ARRAY_WRAPPER
-                )
-            END,
             src.__$operation,
             src.__$start_lsn,
             src.__$seqval
@@ -110,7 +120,12 @@ SELECT
     END AS OperationName,
     CONVERT(VARCHAR(50), StartLsn, 1) AS StartLsn,
     CONVERT(VARCHAR(50), SeqVal, 1) AS SeqVal,
-    PrimaryKeyJson,
-    RowDataJson
+    RecordDataJson
+    into #CdcEvents_Ordered
 FROM #CdcEvents
 ORDER BY StartLsn, SeqVal, EventId;
+
+select * from #CdcEvents_Ordered
+drop table #CdcEvents_Ordered
+END
+GO
