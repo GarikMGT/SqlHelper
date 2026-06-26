@@ -24,9 +24,6 @@ BEGIN
 DECLARE @FromLsn       BINARY(10) = sys.fn_cdc_increment_lsn(@SavedStartLsn);
 DECLARE @ToLsn         BINARY(10) = sys.fn_cdc_get_max_lsn();
 
-DECLARE @FromLsnText VARCHAR(50) = CONVERT(VARCHAR(50), @FromLsn, 1);
-DECLARE @ToLsnText   VARCHAR(50) = CONVERT(VARCHAR(50), @ToLsn, 1);
-
 DROP TABLE IF EXISTS #TrackedTables;
 DROP TABLE IF EXISTS #CdcEvents;
 
@@ -92,12 +89,14 @@ BEGIN
             src.__$seqval
         FROM cdc.fn_cdc_get_all_changes_' + @CaptureInstance + N'
         (
-            ' + @FromLsnText + N',
-            ' + @ToLsnText + N',
+            CONVERT(BINARY(10), ''' + CONVERT(VARCHAR(50), @FromLsn, 1) + N''', 1),
+            CONVERT(BINARY(10), ''' + CONVERT(VARCHAR(50), @ToLsn, 1) + N''', 1),
             ''all''
         ) AS src
         WHERE src.__$operation IN (1, 2, 4);
     ';
+
+    Print @Sql
 
     EXEC sys.sp_executesql @Sql;
 

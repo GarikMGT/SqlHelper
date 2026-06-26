@@ -14,7 +14,7 @@ CREATE TABLE #temp
 );
 
 Insert into #temp
-EXEC dbo.ExportCdcEvents @SavedStartLsn = 0x0000002B00000CD00001
+EXEC dbo.ExportCdcEvents @SavedStartLsn = 0x0000002800000F500038
 
 select * from #temp
 

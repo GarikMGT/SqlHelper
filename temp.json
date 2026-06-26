@@ -53,5 +53,18 @@
     "OrderAmount": 80.00,
     "OrderStatus": "Open",
     "ModifiedDate": "2026-06-12T15:30:52.1265880"
+  },
+
+  "temp": {
+    "__$start_lsn": "AAAAKQAABKgACQ==",
+    "__$seqval": "AAAAKQAABKgAAg==",
+    "__$operation": 4,
+    "__$update_mask": "DA==",
+    "CustomerId": 1,
+    "CustomerName": "Anna",
+    "City": "Abovyan",
+    "ModifiedDate": "2026-06-26T21:52:56.6465779"
   }
 }
+
+
