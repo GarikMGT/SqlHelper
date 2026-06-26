@@ -39,4 +39,22 @@ Process next event
       │
       ▼
 Commit transaction
+
+--------------------------------------------------------------------------------------------------------------------------
+
+#IdMapping
+
+Stores identity translations created during replay.
+
+Example:
+
++------------+-------------+------------+------------+------------+
+| SchemaName | TableName   | ColumnName | OldValue   | NewValue   |
++------------+-------------+------------+------------+------------+
+| dbo        | Customer    | CustomerId | 4          | 10         |
++------------+-------------+------------+------------+------------+
+
+All subsequent events use this mapping before execution,
+ensuring that primary key and foreign key relationships remain
+consistent in DB1.
 ```
