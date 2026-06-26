@@ -1,6 +1,51 @@
 USE CDC_DB2;
 GO
 
+/******************************************************************************
+Procedure: dbo.ExportCdcEvents
+
+Purpose
+-------
+Exports all SQL Server CDC changes since a given LSN as a generic ordered
+event stream.
+
+Parameters
+----------
+@SavedStartLsn
+    Last processed LSN. Changes after this LSN are exported.
+
+Returns
+-------
+Ordered list of events:
+    - SchemaName
+    - TableName
+    - OperationCode
+    - StartLsn
+    - SeqVal
+    - RecordDataJson
+
+Ordering
+--------
+Events are ordered by:
+    StartLsn
+    SeqVal
+
+This preserves the original order in which SQL Server committed the changes.
+
+Notes
+-----
+- Works with every CDC-enabled table.
+- Discovers tracked tables automatically from cdc.change_tables.
+- Does not generate replay SQL.
+- Does not modify any user data.
+
+Example
+-------
+EXEC dbo.ExportCdcEvents
+    @SavedStartLsn = 0x0000002B00000CD00001;
+
+******************************************************************************/
+
 IF OBJECT_ID(N'dbo.ExportCdcEvents', N'P') IS NULL
 BEGIN
     EXEC('
